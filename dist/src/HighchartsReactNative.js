@@ -18,10 +18,10 @@ let httpProto = 'http://';
 export default class HighchartsReactNative extends React.PureComponent {
     static getDerivedStateFromProps(props, state) {
         let width = Dimensions.get('window').width;
-        let height =  Dimensions.get('window').height;
-        if(!!props.styles) {
+        let height = Dimensions.get('window').height;
+        if (!!props.styles) {
             const userStyles = StyleSheet.flatten(props.styles);
-            const {width: w, height: h} = userStyles;
+            const { width: w, height: h } = userStyles;
             width = w;
             height = h;
         }
@@ -47,7 +47,7 @@ export default class HighchartsReactNative extends React.PureComponent {
             console.error("Failed to fetch scripts or layout. " + error.message)
         }
     }
-    
+
     getAssetAsString = async (asset) => {
         const downloadedModules = await FileSystem.readDirectoryAsync(FileSystem.cacheDirectory)
         let fileName = 'ExponentAsset-' + asset.hash + '.' + asset.type
@@ -60,7 +60,7 @@ export default class HighchartsReactNative extends React.PureComponent {
     }
 
     addScript = async (name, isModule, useCDN) => {
-        if(useCDN) {
+        if (useCDN) {
             const response = await fetch(
                 httpProto + cdnPath + (isModule ? 'modules/' : '') + name + '.js'
             ).catch((error) => {
@@ -70,11 +70,11 @@ export default class HighchartsReactNative extends React.PureComponent {
         } else {
             const script = Asset.fromModule(
                 isModule &&
-                name !== 'highcharts-more' &&
-                name !== 'highcharts-3d' ?
-                HighchartsModules.modules[name] : HighchartsModules[name]
+                    name !== 'highcharts-more' &&
+                    name !== 'highcharts-3d' ?
+                    HighchartsModules.modules[name] : HighchartsModules[name]
             )
-            stringifiedScripts[name] = await this.getAssetAsString(script)
+            stringifiedScripts[name] = await FileSystem.readAsStringAsync(script.uri)
         }
     }
 
@@ -82,7 +82,7 @@ export default class HighchartsReactNative extends React.PureComponent {
         const indexHtml = Asset.fromModule(require('../highcharts-layout/index.html'))
 
         this.setState({
-            layoutHTML: await this.getAssetAsString(indexHtml)
+            layoutHTML: await FileSystem.readAsStringAsync(indexHtml.uri)
         })
     }
 
@@ -204,9 +204,9 @@ export default class HighchartsReactNative extends React.PureComponent {
                     ]}
                 >
                     <WebView
-                        ref={ref => {this.webviewRef = ref}}
-                        onMessage = {this.props.onMessage ? (event) => this.props.onMessage(event.nativeEvent.data) : () => {}}
-                        source = {
+                        ref={ref => { this.webviewRef = ref }}
+                        onMessage={this.props.onMessage ? (event) => this.props.onMessage(event.nativeEvent.data) : () => { }}
+                        source={
                             {
                                 html: this.state.layoutHTML
                             }
@@ -221,7 +221,7 @@ export default class HighchartsReactNative extends React.PureComponent {
                         scrollEnabled={false}
                         mixedContentMode='always'
                         allowFileAccessFromFileURLs={true}
-                        startInLoadingState = {this.props.loader}
+                        startInLoadingState={this.props.loader}
                         style={this.props.webviewStyles}
                     />
                 </View>
