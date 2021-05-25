@@ -1,35 +1,38 @@
+# Deprecation disclaimer
+
+*This project is no longer actively maintained*
+
+As of 01.01.2021, The React Native wrapper is no longer maintained by Highsoft. The repository will remain available, but we can not guarantee that it will work as intended with future releases of both React Native itself, or Highcharts.
+
 # Highcharts React Native
 Official minimal [Highcharts](https://www.highcharts.com/) wrapper for React Native.
 
 ## Table of Contents
-1. [Getting started](#getting-started)
-    1. [General prerequisites](#general-prerequisites)
-    2. [Installing](#installing)
-    3. [Using](#using)
-        1. [Basic usage example](#basic-usage-example)
-        2. [Highcharts chart](#highchart-chart)
-        3. [Highcharts live data update](#highcharts-live-data-update)
-        4. [Highcharts advanced series](#highcharts-advanced-series)
-        5. [Optimal way to update](#optimal-way-to-update)
-2. [Options details](#options-details)
-    1. [options](#options)
-    2. [styles](#styles)
-    3. [modules](#modules)
-    4. [callback](#callback)
-    5. [useSSL](#useSSL)
-    6. [useCDN](#useCDN)
-    7. [data](#data)
-    8. [onMessage](#onMessage)
-    9. [loader](#loader)
-    10. [webviewStyles](#webviewStyles)
-    11. [setOptions](#setOptions)
-    12. [devPort](#devPort)
-3. [Get repository](#get-repository)
-4. [FAQ](#faq)
-    1. [Where to look for help?](#where-to-look-for-help)
-    2. [Files are not loaded](#files-are-not-loaded)
-    3. [Error loading page](#error-loading-page)
-5. [Changelog](#changelog)
+- [Deprecation disclaimer](#deprecation-disclaimer)
+- [Highcharts React Native](#highcharts-react-native)
+  - [Table of Contents](#table-of-contents)
+  - [Getting Started](#getting-started)
+    - [General prerequisites](#general-prerequisites)
+    - [Installing](#installing)
+    - [Updating Highcharts package](#updating-highcharts-package)
+    - [Usage](#usage)
+      - [Basic usage example](#basic-usage-example)
+      - [Highcharts chart](#highcharts-chart)
+    - [Highcharts live data update](#highcharts-live-data-update)
+    - [Using Highcharts modules e.g solid-gauge, drilldown, or exporting](#using-highcharts-modules-eg-solid-gauge-drilldown-or-exporting)
+    - [Optimal way to update](#optimal-way-to-update)
+  - [Options details](#options-details)
+  - [Get repository](#get-repository)
+  - [FAQ](#faq)
+    - [Where to look for help?](#where-to-look-for-help)
+    - [Files are not loaded](#files-are-not-loaded)
+    - [Error loading page](#error-loading-page)
+  - [Changelog](#changelog)
+    - [3.0](#30)
+    - [3.0.1](#301)
+    - [3.1.0](#310)
+    - [3.1.1:](#311)
+    - [3.1.2](#312)
 
 ## Getting Started
 
@@ -48,7 +51,7 @@ Packages which should be installed within your project:
 
 ***If you're using this package with Expo Tools, please make sure your  `Expo SDK`  version is higher than or equal to  `v38.0.0`, otherwise use the  `v2.2.3`  version of this package, which should work from  `v33.0.0`.***
 
-***In bare Ract Native application you need to also install the `react-native-unimodules` package, and configure the content of `ios` and `android` build directiories like it's described [here](https://docs.expo.io/bare/installing-unimodules/#installation).***
+***In bare React Native application you need to also install the `react-native-unimodules` package, and configure the content of `ios` and `android` build directiories like it's described [here](https://docs.expo.io/bare/installing-unimodules/#installation).***
 
 ### Installing
 
@@ -83,6 +86,18 @@ module.exports = (async () => {
       }
     }
 })()
+```
+### Updating Highcharts package
+
+Since this package has been deprecated, we decided to meet our users' needs and created the `update-highcharts` script, which will get the latest Highcharts release and replace source files used by this wrapper, and let the community keep developing the `highcharts-react-native` package.
+
+In order to run the update process, please run the following commands in this package directory:
+```bash
+npm i
+```
+and then
+```bash
+npm run update-highcharts
 ```
 ### Usage
 
@@ -342,6 +357,7 @@ Available properties:
 | `onMessage` | Function | no | Global communication between Webview and App. The function takes the message as the first argument. |
 | `loader` | Boolean | no | Set the flag to `true`, if you would like to show loader while chart is loading. |
 | `webviewStyles` | Object | no | You can style your webview using JavaScript object structured like in the regular React and React Native apps. |
+| `webviewProps` | Object | no | You can pass webview props. |
 | `setOptions` | Object | no | Options which are set for Highcharts through `Highcharts.setOptions()` method. Usually it is used to set the `global` and `lang` options. For more details please visit [Highcharts documentation](https://api.highcharts.com/class-reference/Highcharts#.setOptions), and [API](https://api.highcharts.com/highcharts/global). |
 | `devPort` | String | no | When using EXPO in DEV mode, you may declare address and port to actually load the html file in Android. You cannot use built-in `file:///` when using Expo,because the Android and iOS folders don’t exist yet. When it’s in STAGING or PROD skip this option and use default the `file:///android_asset` path. |
 

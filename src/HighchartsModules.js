@@ -2,7 +2,7 @@
 // into the custom '.hcscript' type, so thath the Metro bundler will treat them all as
 // the Asset instead of common JS file. 
 
-export default {
+module.exports = {
     highcharts: require('../highcharts-files/highcharts.hcscript'),
     'highcharts-more': require('../highcharts-files/highcharts-more.hcscript'),
     'highcharts-3d': require('../highcharts-files/highcharts-3d.hcscript'),
@@ -24,6 +24,8 @@ export default {
         'histogram-bellcurve': require('../highcharts-files/modules/histogram-bellcurve.hcscript'),
         'item-series': require('../highcharts-files/modules/item-series.hcscript'),
         lollipop: require('../highcharts-files/modules/lollipop.hcscript'),
+        moment: require('../highcharts-files/modules/moment.hcscript'),
+        'moment-timezone': require('../highcharts-files/modules/moment-timezone.hcscript'),
         networkgraph: require('../highcharts-files/modules/networkgraph.hcscript'),
         'no-data-to-display': require('../highcharts-files/modules/no-data-to-display.hcscript'),
         organization: require('../highcharts-files/modules/organization.hcscript'),
